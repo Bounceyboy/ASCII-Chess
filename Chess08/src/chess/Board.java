@@ -378,14 +378,15 @@ public class Board {
 										return false;
 									}
 								}
+								if(Spaces[6][k.getY()].isOccupied() && Spaces[6][k.getY()].getPiece().getname().equals("King")){
+										Piece rook=Spaces[move.getX()+1][k.getY()].emptySpace();
+										Spaces[k.getX()+1][k.getY()].storePiece(rook);
+										rook.setX(5);
+										rook.setmove(true);
+										return true;
+								}
 							}
-							if(Spaces[k.getX()+2][k.getY()].equals(k)){
-							Piece rook=Spaces[move.getX()+1][k.getY()].emptySpace();
-							Spaces[k.getX()+1][k.getY()].storePiece(rook);
-							rook.setX(5);
-							rook.setmove(true);
-							return true;
-							}
+							
 						}
 					}
 				}
@@ -405,14 +406,15 @@ public class Board {
 											return false;
 										}
 									}
+									if(Spaces[2][k.getY()].isOccupied() && Spaces[2][k.getY()].getPiece().getname().equals("King")){
+										Piece rook=Spaces[move.getX()-2][k.getY()].emptySpace();
+										Spaces[k.getX()-1][k.getY()].storePiece(rook);
+										rook.setX(3);
+										rook.setmove(true);
+										return true;
 								}
-								if(Spaces[k.getX()-2][k.getY()].equals(k)){
-								Piece rook=Spaces[move.getX()-2][k.getY()].emptySpace();
-								Spaces[k.getX()-1][k.getY()].storePiece(rook);
-								rook.setX(3);
-								rook.setmove(true);
-								return true;
 								}
+								
 						}
 					}
 				}
