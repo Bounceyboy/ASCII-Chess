@@ -144,7 +144,7 @@ public class Board {
 			}
 		}
 		
-		if(Spaces[pc[0]][pc[1]].getPiece()!=null){
+		if(Spaces[pc[0]][pc[1]].getPiece()!=null && ((Spaces[pc[0]][pc[1]].getPiece().getWhite() && player.equals("Black")) || (!Spaces[pc[0]][pc[1]].getPiece().getWhite() && player.equals("White")))){
 			//castle check
 			if(Math.abs(pc[0]-local[0])>1 && Spaces[pc[0]][pc[1]].getPiece().getname().equals("King")){
 				boolean ret=castle(Spaces[pc[0]][pc[1]],Spaces[local[0]][local[1]]);
@@ -223,18 +223,18 @@ public class Board {
 		for(int j=0;j<8;j++){
 			for(int i=0;i<8;i++){
 				if(Spaces[i][j].isOccupied() && Spaces[i][j].getPiece().getWhite()==king.getWhite()){
-					
+					Piece moving=Spaces[i][j].emptySpace();
+					int x=moving.getX();
+					int y=moving.getY();
+					boolean hasmoved=moving.hasmoved();
+					int moves=moving.moves();
 					for(int l=0;l<8;l++){
 						for(int k=0;k<8;k++){
 							if(Spaces[k][l].isOccupied() && 
-									Spaces[k][l].getPiece().getWhite()!=Spaces[i][j].getPiece().getWhite()){
+									Spaces[k][l].getPiece().getWhite()!=moving.getWhite()){
 								
 								Piece temp=Spaces[k][l].getPiece();
-								Piece moving=Spaces[i][j].emptySpace();
-								int x=moving.getX();
-								int y=moving.getY();
-								boolean hasmoved=moving.hasmoved();
-								int moves=moving.moves();
+								
 								if(moving.move(Spaces[k][l], this)){
 								if(!king.check(this)){
 									Spaces[k][l].emptySpace();
@@ -262,11 +262,6 @@ public class Board {
 								}
 							}
 							else if(!Spaces[k][l].isOccupied()){
-								Piece moving=Spaces[i][j].emptySpace();
-								int x=moving.getX();
-								int y=moving.getY();
-								boolean hasmoved=moving.hasmoved();
-								int moves=moving.moves();
 								if(moving.move(Spaces[k][l], this)){
 								if(!king.check(this)){
 									king.check(this);

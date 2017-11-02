@@ -50,15 +50,7 @@ public class Chess {
 			legal=false;
 		}
 		scan.close();
-		/* TODO: (for Jason)
-		 * - promotion
-		 * - en passant
-		 * - castling
-		 * 
-		 * I will handle these after the rules are implemented since en passant is
-		 * only possible for 1 turn after a specific move and castling requires
-		 * accessing two spaces.
-		 */
+		
 		
 	}
 	
