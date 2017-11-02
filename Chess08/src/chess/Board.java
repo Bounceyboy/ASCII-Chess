@@ -21,6 +21,7 @@ public class Board {
 	Piece wk,bk;
 	private boolean stillplaying=true;
 	private int draw=0;
+	private boolean enpassed=false;
 	/**
 	 * Builds the board and places all pieces in their starting locations.
 	 */
@@ -161,6 +162,12 @@ public class Board {
 			}
 			Piece temp = Spaces[pc[0]][pc[1]].emptySpace();
 			boolean moved=temp.move(Spaces[local[0]][local[1]], this);
+			if(temp.getname().equals("Pawn") && temp.moves()==2){
+				enpassed=true;
+			}
+			else{
+				enpassed=false;
+			}
 			if(moved==false){
 				System.out.println("Illegal move, try again");
 				Spaces[pc[0]][pc[1]].storePiece(temp);
@@ -372,12 +379,13 @@ public class Board {
 									}
 								}
 							}
-							
+							if(Spaces[k.getX()+2][k.getY()].equals(k)){
 							Piece rook=Spaces[move.getX()+1][k.getY()].emptySpace();
 							Spaces[k.getX()+1][k.getY()].storePiece(rook);
 							rook.setX(5);
 							rook.setmove(true);
 							return true;
+							}
 						}
 					}
 				}
@@ -398,11 +406,13 @@ public class Board {
 										}
 									}
 								}
+								if(Spaces[k.getX()-2][k.getY()].equals(k)){
 								Piece rook=Spaces[move.getX()-2][k.getY()].emptySpace();
 								Spaces[k.getX()-1][k.getY()].storePiece(rook);
 								rook.setX(3);
 								rook.setmove(true);
 								return true;
+								}
 						}
 					}
 				}
@@ -421,7 +431,7 @@ public class Board {
 			if(Spaces[p.getX()+1][p.getY()].isOccupied() && 
 					Spaces[p.getX()+1][p.getY()].getPiece().getname().equals("Pawn") &&
 						Spaces[p.getX()+1][p.getY()].getPiece().getWhite()!=p.getPiece().getWhite()){
-				if(Spaces[p.getX()+1][p.getY()].getPiece().moves()==2){
+				if(Spaces[p.getX()+1][p.getY()].getPiece().moves()==2 && enpassed==true){
 					Spaces[p.getX()+1][p.getY()].emptySpace();
 					//where to move
 					m.storePiece(p.getPiece());
@@ -434,7 +444,7 @@ public class Board {
 			else if(Spaces[p.getX()-1][p.getY()].isOccupied() &&
 						Spaces[p.getX()-1][p.getY()].getPiece().getname().equals("Pawn") &&
 							Spaces[p.getX()-1][p.getY()].getPiece().getWhite()!=p.getPiece().getWhite()){
-					if(Spaces[p.getX()-1][p.getY()].getPiece().moves()==2){
+					if(Spaces[p.getX()-1][p.getY()].getPiece().moves()==2 && enpassed==true){
 						Spaces[p.getX()-1][p.getY()].emptySpace();
 						//where to move
 						m.storePiece(p.getPiece());
