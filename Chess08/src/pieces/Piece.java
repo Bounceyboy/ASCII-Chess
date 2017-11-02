@@ -1,5 +1,6 @@
 package pieces;
 
+import chess.Board;
 import chess.Space;
 
 /**
@@ -22,11 +23,43 @@ public class Piece {
 	 * <p>Also be sure to not be moving the piece to the same space because there is no check for that.
 	 * 
 	 * @param moveTo	The space to attempt moving the piece to.
-	 * @return			False if illegal move, true if legal move (for the piece. This will overwrite a piece existing in the moveTo spot).
+	 * @return			False if illegal move, true if legal move (for the piece. This will overwrite a piece existing in the moveTo spot, if that piece is the other players piece).
 	 */
-	public boolean move(Space moveTo) {
+	public boolean move(Space moveTo, Board game) {
 		return false;
 	};
-	
+	public String getname(){
+		return "name";
+	};
+	public boolean check(Board game){
+		return false;
+	};
+	public int getX(){
+		return this.x;
+	};
+	public void setX(int x){
+		this.x=x;
+	};
+	public void setY(int y){
+		this.y=y;
+	};
+	public int getY(){
+		return this.y;
+	};
+	public boolean getWhite(){
+		return this.isWhite;
+	};
+	public boolean hasmoved(){
+		return true;
+	};
+	public int moves(){
+		return 0;
+	};
+	public void setmoves(int x){
+		
+	};
+	public void setmove(boolean m){
+		
+	};
 	
 }
